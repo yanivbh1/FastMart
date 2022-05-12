@@ -1,7 +1,7 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Burgernaut",
+		"name": "Fastmart",
 		"_postman_id": "ace6e748-71f5-18eb-2888-c1830918c211",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
@@ -49,7 +49,7 @@
 							"mode": "raw",
 							"raw": "{\n\t\"items\": [\n\t\t{\"name\": \"burger\", \"quantity\": 10},\n\t\t{\"name\": \"fries\", \"quantity\": 20}\n\t],\n\t\"email\": \"test@gmail.com\"\n}"
 						},
-						"description": "Place a food order at Burgernaut"
+						"description": "Place a food order at Fastmart"
 					},
 					"response": []
 				},
@@ -69,7 +69,7 @@
 							"mode": "raw",
 							"raw": "{\n\t\"items\": [\n\t\t{\"name\": \"burger\", \"quantity\": 3},\n\t\t{\"name\": \"fries\", \"quantity\": 2}\n\t]\n}"
 						},
-						"description": "Place a food order at Burgernaut"
+						"description": "Place a food order at Fastmart"
 					},
 					"response": []
 				}

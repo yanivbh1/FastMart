@@ -1,7 +1,7 @@
 {
   "name": "restaurant-service",
   "version": "1.0.0",
-  "description": "A restaurant service for Burgernaut that consumes orders from the queue and updates the order status.",
+  "description": "A restaurant service for Fastmart that consumes orders from the queue and updates the order status.",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "amqplib": "^0.6.0",
+    "memphis-dev": "^0.2.1",
     "mongoose": "^5.11.11",
     "winston": "^3.3.3"
   },

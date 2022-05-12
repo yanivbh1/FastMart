@@ -1,5 +1,5 @@
-const EMAIL_SUBJECT = 'Burgernaut Order Confirmation';
-const EMAIL_TEXT_DEFAULT = 'Thank you for ordering from Burgernaut. ';
+const EMAIL_SUBJECT = 'Fastmart Order Confirmation';
+const EMAIL_TEXT_DEFAULT = 'Thank you for ordering from Fastmart. ';
 const EXCHANGE = 'orders';
 const QUEUE = 'orders.confirmations'
 

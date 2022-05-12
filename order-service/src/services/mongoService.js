@@ -3,7 +3,7 @@ const { logger } = require('./loggerService')
 
 // environment variables
 const MONGO_CONTAINER_NAME = process.env.MONGO_HOST || 'localhost';
-const MONGO_URI = `mongodb://${MONGO_CONTAINER_NAME}:27017/burgernautDB`;
+const MONGO_URI = `mongodb://${MONGO_CONTAINER_NAME}:27017/FastmartDB`;
 
 
 /**

@@ -16,21 +16,12 @@ var mailOptions = {
  */
 const sendConfirmation = (order) => {
     orderContent = JSON.parse(order.getData().toString());
-    mailOptions.text += `Your order ${orderContent._id} amounting to ${orderContent.total} is confirmed and will be delivered shortly.`
+    mailOptions.text += `\nYour order ${orderContent._id} amounting to ${orderContent.total} is confirmed and will be delivered shortly.`
     mailOptions.to = orderContent.email;
     mailOptions.from = "nscidonotreply@gmail.com";
-    // sendEmail(mailOptions, function (err, info) {
-    //     if (err) {
-    //         logger.log('crit',`email - failed to send confirmation to ${orderContent.email} for order ${orderContent._id}.`)
-    //         logger.info(err)
-    //     } else {
-    //         logger.info(`email - confirmation sent to ${orderContent.email} for order ${orderContent._id}.`);
-    //         order.ack();
-    //     }
-    //   })
     sendEmail(mailOptions)
     .then((res) => {
-        console.log(res);
+        logger.info("Order confirmation sent to " + mailOptions.to)
         order.ack();
     })
     .catch((e) => {

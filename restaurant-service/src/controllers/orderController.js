@@ -12,12 +12,12 @@ const ORDER_DELIVERY_TIME = parseInt(process.env.ORDER_DELIVERY_TIME) || 10000;
 /**
  * Process the order.
  */
-const processOrder = (order, orderChannel) => {
-    orderContent = JSON.parse(order.content.toString());
+const processOrder = (order) => {
+    orderContent = JSON.parse(order.getData().toString());
     changeOrderStatus(OrderModel, orderContent._id, ORDER_ACCEPTED);
     setTimeout(() => {
         changeOrderStatus(OrderModel, orderContent._id, ORDER_DELIVERED);
-        orderChannel.ack(order);
+        order.ack();
     }, ORDER_DELIVERY_TIME);
 }
 

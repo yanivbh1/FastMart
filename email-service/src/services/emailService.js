@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-const EMAIL_ID = process.env.EMAIL_ID || 'nscidonotreply@gmail.com';
-const EMAIL_PWD = process.env.EMAIL_PWD || 'jzwaonluilpuqntl';
+const EMAIL_ID = process.env.EMAIL_ID;
+const EMAIL_PWD = process.env.EMAIL_PWD;
 const EMAIL_SERVICE = process.env.EMAIL_SERVICE || 'gmail';
 
 const transporter = nodemailer.createTransport({

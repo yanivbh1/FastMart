@@ -10,7 +10,7 @@ const ERROR_MAPPING = {
 }
 
 const MORGAN_CONFIG = ':method :url :status :res[content-length] :remote-addr - :response-time ms';
-const ORDER_SERVICE_WELCOME_MSG = 'Welcome to the Burgernaut order service!'
+const ORDER_SERVICE_WELCOME_MSG = 'Welcome to the Fastmart order service!'
 
 module.exports = {
     ITEM_PRICE: ITEM_PRICE,

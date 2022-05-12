@@ -1,44 +1,43 @@
-const amqp = require("amqplib");
+const memphis = require("memphis-dev");
 const { processOrder } = require('../controllers/orderController');
 const { logger } = require('./loggerService');
-const {EXCHANGE, QUEUE} = require('../resources/constants');
-const PREFETCH_COUNT = parseInt(process.env.PREFETCH_COUNT) || 2;
-const ORDER_DELIVERY_TIME = parseInt(process.env.ORDER_DELIVERY_TIME) || 10000;
-const MQ_HOST = process.env.MQ_HOST || 'localhost';
-const MQ_URL = `amqp://${MQ_HOST}:5672`;
-let orderChannel = null;
+const MEMPHIS_HOST = process.env.MEMPHIS_HOST || 'localhost'; // create MQ connection string using environment variable
+const MEMPHIS_USERNAME = process.env.MEMPHIS_USERNAME;
+const MEMPHIS_TOKEN = process.env.MEMPHIS_TOKEN;
 
 /**
- * Connect to RabbitMQ and consumer orders
+ * Connect to Memphis and consumer orders
  */
-const amqpConnectAndConsume = async () => {
+const memphisConnect = async () => {
     try {
-        const mqConnection = await amqp.connect(MQ_URL);
-        
-        orderChannel = await mqConnection.createChannel();
-        
-        await orderChannel.assertExchange(EXCHANGE, 'fanout', {
-            durable: false
+        logger.info(`Memphis - trying to connect`)
+        await memphis.connect({
+            host: MEMPHIS_HOST,
+            username: MEMPHIS_USERNAME,
+            connectionToken: MEMPHIS_TOKEN
         });
+        logger.info(`Memphis - connection established`)
+        
+        ordersStation_consumer = await memphis.consumer({
+            stationName: "orders",
+            consumerName: "resturant_service",
+        });
+        logger.info(`ordersStation_consumer created`)
 
-        // Ensure that the queue exists or create one if it doesn't
-        await orderChannel.assertQueue(QUEUE);
-        await orderChannel.bindQueue(QUEUE, EXCHANGE, '');
-
-        // Only process <PREFETCH_COUNT> orders at a time
-        orderChannel.prefetch(PREFETCH_COUNT);
-        logger.info(`AMQP - connection established at ${MQ_URL} with prefetch count ${PREFETCH_COUNT} and delivery time ${ORDER_DELIVERY_TIME}ms`)
-
-        orderChannel.consume(QUEUE, order => {
-            processOrder(order, orderChannel);
+        ordersStation_consumer.on("message", order => {
+            // processing
+            logger.info("New order received")
+            logger.info(order.getData().toString())
+            processOrder(order);
         });
     }
     catch (ex) {
-        logger.log('fatal',`AMQP - ${ex}`);
+        logger.log('fatal',`Memphis - ${ex}`);
+        memphis.close();
         process.exit();
     }
 }
 
 module.exports = {
-    amqpConnectAndConsume: amqpConnectAndConsume
+    memphisConnect: memphisConnect
 }
