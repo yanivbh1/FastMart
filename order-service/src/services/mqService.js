@@ -1,8 +1,8 @@
 const memphis = require("memphis-dev");
 const { logger } = require('./loggerService')
 const MEMPHIS_HOST = process.env.MEMPHIS_HOST || 'localhost'; // create MQ connection string using environment variable
-const MEMPHIS_USERNAME = process.env.MEMPHIS_USERNAME;
-const MEMPHIS_TOKEN = process.env.MEMPHIS_TOKEN;
+const MEMPHIS_USERNAME = process.env.MEMPHIS_USERNAME || 'fastmart';
+const MEMPHIS_TOKEN = process.env.MEMPHIS_TOKEN || 'memphis';
 let ordersStation_producer = null;
 
 const memphisConnect = async () => {

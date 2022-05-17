@@ -2,9 +2,8 @@ const memphis = require("memphis-dev");
 const { processOrder } = require('../controllers/orderController');
 const { logger } = require('./loggerService');
 const MEMPHIS_HOST = process.env.MEMPHIS_HOST || 'localhost'; // create MQ connection string using environment variable
-const MEMPHIS_USERNAME = process.env.MEMPHIS_USERNAME;
-const MEMPHIS_TOKEN = process.env.MEMPHIS_TOKEN;
-
+const MEMPHIS_USERNAME = process.env.MEMPHIS_USERNAME || 'fastmart';;
+const MEMPHIS_TOKEN = process.env.MEMPHIS_TOKEN || 'memphis';
 /**
  * Connect to Memphis and consumer orders
  */
@@ -24,12 +23,18 @@ const memphisConnect = async () => {
         });
         logger.info(`ordersStation_consumer created`)
 
+        notificationStation_producer = await memphis.producer({
+            stationName: "notifications",
+            producerName: "resturant_service",
+        });
+
         ordersStation_consumer.on("message", order => {
             // processing
             logger.info("New order received")
             logger.info(order.getData().toString())
-            processOrder(order);
+            processOrder(order, notificationStation_producer);
         });
+
     }
     catch (ex) {
         logger.log('fatal',`Memphis - ${ex}`);

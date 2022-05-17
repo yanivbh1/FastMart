@@ -5,7 +5,7 @@ const { MORGAN_CONFIG } = require('./resources/constants');
 const { logger } = require('./services/loggerService');
 const { errorHandlerMiddleware } = require('./services/errorHandlingService');
 const { mongoConnect } = require('./services/mongoService');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const { injectPublishService, memphisConnect } = require('./services/mqService');
 
 startServer = () => {

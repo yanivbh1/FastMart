@@ -1,0 +1,143 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fastmart
+---
+apiVersion: /v1
+kind: Service
+metadata:
+  name: orders
+  namespace: fastmart
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    app: orders-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-service
+  namespace: fastmart
+  labels:
+    app: orders-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-service
+  template:
+    metadata:
+      name: orders-service
+      labels:
+        app: orders-service
+    spec:
+      containers:
+        - name: orders-service
+          image: yanivbhamo/fastmart-order-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+          - name: MEMPHIS_HOST
+            value: "memphis-cluster.memphis.svc.cluster.local"
+          - name: MEMPHIS_USERNAME
+            value: "fastmart"
+          - name: MEMPHIS_TOKEN
+            value: "memphis"
+---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: email-service
+#   namespace: fastmart
+#   labels:
+#     app: email-service
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: email-service
+#   template:
+#     metadata:
+#       name: email-service
+#       labels:
+#         app: email-service
+#     spec:
+#       containers:
+#         - name: email-service
+#           image: yanivbhamo/fastmart-email-service:latest
+#           imagePullPolicy: Always
+#           ports:
+#             - containerPort: 3000
+#           env:
+#           - name: MEMPHIS_HOST
+#             value: "memphis-cluster.memphis.svc.cluster.local"
+#           - name: MEMPHIS_USERNAME
+#             value: "fastmart"
+#           - name: MEMPHIS_TOKEN
+#             value: "memphis"
+#           - name: EMAIL_ID
+#             value: "test@gmail.com"
+#           - name: EMAIL_PWD
+#             value: "test"
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: resturant-service
+#   namespace: fastmart
+#   labels:
+#     app: resturant-service
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: resturant-service
+#   template:
+#     metadata:
+#       name: resturant-service
+#       labels:
+#         app: resturant-service
+#     spec:
+#       containers:
+#         - name: resturant-service
+#           image: yanivbhamo/fastmart-resturant-service:latest
+#           imagePullPolicy: Always
+#           ports:
+#             - containerPort: 3000
+#           env:
+#           - name: MEMPHIS_HOST
+#             value: "memphis-cluster.memphis.svc.cluster.local"
+#           - name: MEMPHIS_USERNAME
+#             value: "fastmart"
+#           - name: MEMPHIS_TOKEN
+#             value: "memphis"
+# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastmart-ui
+  namespace: fastmart
+  labels:
+    app: fastmart-ui-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastmart-ui
+  template:
+    metadata:
+      name: fastmart-ui
+      labels:
+        app: fastmart-ui
+    spec:
+      containers:
+        - name: fastmart-ui
+          image: yanivbhamo/fastmart-ui-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000

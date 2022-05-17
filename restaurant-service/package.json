@@ -7,10 +7,9 @@
     "start": "node ./index.js",
     "dev": "nodemon ./index.js"
   },
-  "author": "Dhanush Kamath",
+  "author": "Dhanush Kamath, Yaniv Ben Hemo",
   "license": "ISC",
   "dependencies": {
-    "amqplib": "^0.6.0",
     "memphis-dev": "^0.2.1",
     "mongoose": "^5.11.11",
     "winston": "^3.3.3"

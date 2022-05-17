@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { orderSchema } = require('../models/orderModel');
 const { ITEM_PRICE } = require('../resources/constants');
+const { logger } = require('../services/loggerService');
 
 // Creating a model with Order as the object name and orderSchema as the Schema
 const Order = mongoose.model('Order', orderSchema)
@@ -12,7 +13,6 @@ const Order = mongoose.model('Order', orderSchema)
  */
 const placeOrder = (req, res, next) => {
     let orderDetails = req.body;
-
     // calculate total amount
     orderDetails.total = orderDetails.items.reduce((currentTotal, item) => {
         return currentTotal + ITEM_PRICE[item.name]*item.quantity
