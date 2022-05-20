@@ -42,12 +42,16 @@ spec:
           ports:
             - containerPort: 3000
           env:
+          - name: PORT
+            value: "3000"
           - name: MEMPHIS_HOST
             value: "memphis-cluster.memphis.svc.cluster.local"
           - name: MEMPHIS_USERNAME
             value: "fastmart"
           - name: MEMPHIS_TOKEN
             value: "memphis"
+          - name: MONGO_HOST
+            value: "mongo.memphis.svc.cluster.local"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -84,6 +88,8 @@ spec:
             value: "test@gmail.com"
           - name: EMAIL_PWD
             value: "test"
+          - name: MONGO_HOST
+            value: "mongo.memphis.svc.cluster.local"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -116,28 +122,5 @@ spec:
             value: "fastmart"
           - name: MEMPHIS_TOKEN
             value: "memphis"
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: fastmart-ui
-  namespace: fastmart
-  labels:
-    app: fastmart-ui-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: fastmart-ui
-  template:
-    metadata:
-      name: fastmart-ui
-      labels:
-        app: fastmart-ui
-    spec:
-      containers:
-        - name: fastmart-ui
-          image: yanivbhamo/fastmart-ui-service:latest
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 3000
+          - name: MONGO_HOST
+            value: "mongo.memphis.svc.cluster.local"
