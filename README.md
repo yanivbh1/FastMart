@@ -1,8 +1,1 @@
-# Fastmart
-
- 
-## Authors
-* **Dhanush Kamath** - [dhanushkamath](https://github.com/dhanushkamath)
-* **Yaniv Ben Hemo** - [yanivbh1](https://github.com/yanivbh1)
-
-https://medium.com/memphis-dev/how-to-build-your-own-wolt-app-b220d738bb71
+<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@imantumorang/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@yaniv-bhemo/1" alt="Recent Article 0"> 
