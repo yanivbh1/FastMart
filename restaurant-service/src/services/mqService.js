@@ -2,8 +2,9 @@ const memphis = require("memphis-dev");
 const { processOrder } = require('../controllers/orderController');
 const { logger } = require('./loggerService');
 const MEMPHIS_HOST = process.env.MEMPHIS_HOST || 'localhost'; // create MQ connection string using environment variable
-const MEMPHIS_USERNAME = process.env.MEMPHIS_USERNAME || 'fastmart';;
-const MEMPHIS_TOKEN = process.env.MEMPHIS_TOKEN || 'memphis';
+const MEMPHIS_USERNAME = process.env.MEMPHIS_USERNAME || 'fastmart';
+const MEMPHIS_PASSWORD = process.env.MEMPHIS_PASSWORD || 'memphis';
+const MEMPHIS_ACCOUNTID = process.env.MEMPHIS_ACCOUNTID || '212111111';
 /**
  * Connect to Memphis and consumer orders
  */
@@ -13,7 +14,8 @@ const memphisConnect = async () => {
         await memphis.connect({
             host: MEMPHIS_HOST,
             username: MEMPHIS_USERNAME,
-            connectionToken: MEMPHIS_TOKEN
+            password: MEMPHIS_PASSWORD,
+            accountId: MEMPHIS_ACCOUNTID
         });
         logger.info(`Memphis - connection established`)
         

@@ -48,8 +48,10 @@ spec:
             value: "memphis-cluster.memphis.svc.cluster.local"
           - name: MEMPHIS_USERNAME
             value: "fastmart"
-          - name: MEMPHIS_TOKEN
+          - name: MEMPHIS_PASSWORD
             value: "memphis"
+          - name: MEMPHIS_ACCOUNTID
+            value: "212111111"
           - name: MONGO_HOST
             value: "mongo.memphis.svc.cluster.local"
 ---
@@ -82,8 +84,10 @@ spec:
             value: "memphis-cluster.memphis.svc.cluster.local"
           - name: MEMPHIS_USERNAME
             value: "fastmart"
-          - name: MEMPHIS_TOKEN
+          - name: MEMPHIS_PASSWORD
             value: "memphis"
+          - name: MEMPHIS_ACCOUNTID
+            value: "212111111"
           - name: EMAIL_ID
             value: "test@gmail.com"
           - name: EMAIL_PWD
@@ -120,7 +124,9 @@ spec:
             value: "memphis-cluster.memphis.svc.cluster.local"
           - name: MEMPHIS_USERNAME
             value: "fastmart"
-          - name: MEMPHIS_TOKEN
+          - name: MEMPHIS_PASSWORD
             value: "memphis"
+          - name: MEMPHIS_ACCOUNTID
+            value: "212111111"
           - name: MONGO_HOST
             value: "mongo.memphis.svc.cluster.local"
